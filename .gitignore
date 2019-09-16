@@ -2,9 +2,7 @@
 
 deps
 
-.elixir_ls
-
-.elixir_ls/dialyzer_manifest_22.0.7_elixir-1.9.1_test
+/.elixir_ls/
 
 _build
 
