@@ -1,6 +1,6 @@
 # Do not track contetns of these folders
 
-deps
+/deps/
 
 /.elixir_ls/
 
