@@ -23,7 +23,6 @@ defmodule Pluggy.Router do
   plug(:dispatch)
 
   get("/fruits", do: FruitController.index(conn))
-  get("/reset", do: Pluggy.Seed.run())
 
   post("/fruits", do: FruitController.create(conn, conn.body_params))
 
