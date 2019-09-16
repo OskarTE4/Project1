@@ -1,0 +1,9 @@
+# Do not track contetns of these folders
+
+deps
+
+.elixir_ls
+
+_build
+
+.DS_Store
