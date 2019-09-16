@@ -23,7 +23,7 @@ defmodule Pluggy.UserController do
         # make sure password is correct
         if pwd == result[0][password] do
           Plug.Conn.put_session(conn, :user_id, id)
-          |> redirect("/")
+          |> redirect("/loggedin/home")
         else
           redirect(conn, "/")
         end
@@ -35,7 +35,6 @@ defmodule Pluggy.UserController do
     |> redirect("/")
   end
 
- 
 
   defp redirect(conn, url),
     do: Plug.Conn.put_resp_header(conn, "location", url) |> send_resp(303, "")

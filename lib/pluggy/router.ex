@@ -23,9 +23,7 @@ defmodule Pluggy.Router do
   plug(:dispatch)
 
   get("/", do: PageLoader.index(conn))
-  post("/users/login", do: UserController.login(conn, conn.body_params))
-
-
+  post("/login", do: UserController.login(conn, conn.body_params))
   post("/logout", do: UserController.logout(conn))
 
   match _ do
