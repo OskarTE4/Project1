@@ -2,7 +2,7 @@
 
 deps
 
-.elixir_ls
+/.elixir_ls/
 
 _build
 
