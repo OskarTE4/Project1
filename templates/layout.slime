@@ -3,5 +3,6 @@ html
    head
        title Whats Their Face v2
        link rel="stylesheet" type="text/css" href="/pluggy.css"
+       meta charset="UTF-8"
    body
    = template

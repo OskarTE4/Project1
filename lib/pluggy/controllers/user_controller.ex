@@ -6,23 +6,20 @@ defmodule Pluggy.UserController do
     username = params["username"]
     pwd = params["pwd"]
     admin = check_admin(username)
-    IO.inspect(admin)
     if admin.rows != [] do
       id = Enum.at(admin.rows, 0) |> Enum.at(0)
       password = Enum.at(admin.rows, 0) |> Enum.at(2)
       if password == pwd do
         Plug.Conn.put_session(conn, :user_id, id)
-        |> redirect("/home")
+        |> redirect("/admin/home")
       else
         redirect(conn, "/error")
       end
     else
-
       result =
           Postgrex.query!(DB, "SELECT * FROM teachers WHERE name = $1", [username],
           pool: DBConnection.Poolboy
           )
-      IO.inspect(result.num_rows)
       case result.num_rows do
         # no user with that username
         0 ->
@@ -30,13 +27,13 @@ defmodule Pluggy.UserController do
 
         # user with that username exists
         _ ->
-          [[id, password]] = result.rows
-          IO.puts(password)
-
+          id = Enum.at(result.rows, 0) |> Enum.at(0)
+          password = Enum.at(result.rows, 0) |> Enum.at(2)
+          IO.inspect(password)
           # make sure password is correct
-          if pwd == pwd do
+          if password == pwd do
             Plug.Conn.put_session(conn, :user_id, id)
-            |> redirect("/home")
+            |> redirect("/teacher/home")
           else
             redirect(conn, "/error")
           end
@@ -44,11 +41,19 @@ defmodule Pluggy.UserController do
     end
   end
 
+  @spec add_teacher(Plug.Conn.t(), nil | keyword | map) :: Plug.Conn.t()
+  def add_teacher(conn, params) do
+    Postgrex.query!(DB, "INSERT INTO teachers (name, password, rights)
+                        VALUES('#{params["name"]}', '#{params["pwd"]}', false)",
+                        [],
+                        pool: DBConnection.Poolboy)
+    redirect(conn, "/home")
+  end
+
   def logout(conn) do
     Plug.Conn.configure_session(conn, drop: true)
     |> redirect("/")
   end
-
 
   defp redirect(conn, url),
     do: Plug.Conn.put_resp_header(conn, "location", url) |> send_resp(303, "")

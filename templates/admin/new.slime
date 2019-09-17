@@ -1,11 +1,12 @@
-= if user.rights == true do
-    form action="/newT" method="post"
-        label for="name" Username
-        input type="text" name="name" id="username"
-        label for="pwd" Password
-        input type="text" name="pwd" id="password"
-        button type="submit" Create new teacher
-- else
+= if user == nil do
     h1 No access
     p You do not have the rights to view or use this page of What's their face. Please go back to home
     a href="/teacher/home" go back
+- else
+    form action="/newT" method="post"
+            label for="name" Username
+            input type="text" name="name" id="username"
+            label for="pwd" Password
+            input type="text" name="pwd" id="password"
+            button type="submit" Create new teacher
+    
