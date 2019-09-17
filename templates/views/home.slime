@@ -1,8 +1,8 @@
 / for each group in groups where school id is equal to teacher id in connection
 
 div
-    a href="/play/#{group.id}"
-        img src="#{group.img}"
+    a href="/play/group.id"
+        img src="group.img"
         p group.name - group.school
 
 
