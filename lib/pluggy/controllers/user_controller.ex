@@ -12,10 +12,9 @@ defmodule Pluggy.UserController do
       password = Enum.at(admin.rows, 0) |> Enum.at(2)
       if password == pwd do
         Plug.Conn.put_session(conn, :user_id, id)
-        |> redirect("/admin/home")
+        |> redirect("/home")
       else
-        redirect(conn, "/")
-        
+        redirect(conn, "/error")
       end
     else
 
@@ -27,7 +26,7 @@ defmodule Pluggy.UserController do
       case result.num_rows do
         # no user with that username
         0 ->
-          redirect(conn, "/")
+          redirect(conn, "/error")
 
         # user with that username exists
         _ ->
@@ -37,9 +36,9 @@ defmodule Pluggy.UserController do
           # make sure password is correct
           if pwd == pwd do
             Plug.Conn.put_session(conn, :user_id, id)
-            |> redirect("/loggedin/home")
+            |> redirect("/home")
           else
-            redirect(conn, "/")
+            redirect(conn, "/error")
           end
       end
     end

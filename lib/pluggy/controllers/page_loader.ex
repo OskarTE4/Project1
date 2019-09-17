@@ -15,7 +15,7 @@ defmodule Pluggy.PageLoader do
         _ -> User.get(session_user)
       end
 
-    send_resp(conn, 200, srender("index", user: current_user))
+    send_resp(conn, 200, srender("views/index", user: current_user))
   end
 
   def nt(conn) do
@@ -27,8 +27,7 @@ defmodule Pluggy.PageLoader do
         nil -> nil
         _ -> User.get(session_user)
       end
-
-      send_resp(conn, 200, srender("newTeacher", user: current_user))
+      send_resp(conn, 200, srender("admin/new", user: current_user))
   end
 
   def home(conn) do
@@ -41,10 +40,12 @@ defmodule Pluggy.PageLoader do
         _ -> User.get(session_user)
       end
 
-      send_resp(conn, 200, srender("home", user: current_user))
+      send_resp(conn, 200, srender("teacher/home", user: current_user))
   end
 
-  def play(conn), do: send_resp(conn, 200, srender("play", []))
+  def play(conn), do: send_resp(conn, 200, srender("teacher/play", []))
+
+  def error(conn), do: send_resp(conn, 200, srender("views/error", []))
 
   defp redirect(conn, url) do
     Plug.Conn.put_resp_header(conn, "location", url) |> send_resp(303, "")

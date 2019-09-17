@@ -23,9 +23,11 @@ defmodule Pluggy.Router do
   plug(:dispatch)
 
   get("/", do: PageLoader.index(conn))
-  get("/newteacher", do: PageLoader.nt(conn))
-  get("/home", do: PageLoader.home(conn))
-  get("/play", do: PageLoader.play(conn))
+  get("/error", do: PageLoader.error(conn))
+  get("/teacher/new", do: PageLoader.nt(conn))
+  get("/teacher/home", do: PageLoader.home(conn))
+  get("/teacher/play", do: PageLoader.play(conn))
+  
   post("/login", do: UserController.login(conn, conn.body_params))
   post("/logout", do: UserController.logout(conn))
 
