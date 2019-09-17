@@ -30,10 +30,12 @@ defmodule Pluggy.Router do
   get("/teacher/play", do: TeacherController.play(conn))
   get("/admin/new", do: AdminController.nt(conn))
   get("/admin/home", do: AdminController.home(conn))
+  get("/admin/schools", do: AdminController.ns(conn))
 
   post("/logout", do: UserController.logout(conn))
   post("/login", do: UserController.login(conn, conn.body_params))
   post("/newT", do: TeacherController.add_new(conn, conn.body_params))
+  post("/newS", do: AdminController.add_new(conn, conn.body_params))
 
   match _ do
     send_resp(conn, 404, "oops")

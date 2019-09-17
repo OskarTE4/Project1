@@ -32,8 +32,14 @@ defmodule Pluggy.TeacherController do
                         VALUES('#{params["name"]}', '#{params["pwd"]}', false)",
                         [],
                         pool: DBConnection.Poolboy)
+    list = Postgrex.query!(DB, "SELECT id FROM teachers WHERE name = $1", [params["name"]], pool: DBConnection.Poolboy)
+    id = Enum.at(list.rows, 0) |> Enum.at(0)
+    IO.inspect params["school"]
+    Postgrex.query!(DB, "INSERT INTO teachers_schools (teacher_id, school_id)
+                        VALUES('#{id}', '#{params["school"]}')", [], pool: DBConnection.Poolboy)
     redirect(conn, "/admin/home")
   end
+  @spec play(Plug.Conn.t()) :: Plug.Conn.t()
   def play(conn) do
     # get user if logged in
     session_user = conn.private.plug_session["user_id"]
