@@ -17,52 +17,6 @@ defmodule Pluggy.PageLoader do
 
     send_resp(conn, 200, srender("views/index", user: current_user))
   end
-  def teacher_home(conn) do
-    # get user if logged in
-    session_user = conn.private.plug_session["user_id"]
-
-    current_user =
-      case session_user do
-        nil -> nil
-        _ -> User.get(session_user)
-      end
-
-      send_resp(conn, 200, srender("teacher/home", user: current_user))
-  end
-
-  def teacher_play(conn) do
-     # get user if logged in
-     session_user = conn.private.plug_session["user_id"]
-
-     current_user =
-       case session_user do
-         nil -> nil
-         _ -> User.get(session_user)
-       end
-    send_resp(conn, 200, srender("teacher/play", user: current_user))
-  end
-  def admin_home(conn) do
-    # get user if logged in
-    session_user = conn.private.plug_session["user_id"]
-
-    current_user =
-      case session_user do
-        nil -> nil
-        _ -> User.get(session_user)
-      end
-      send_resp(conn, 200, srender("admin/home", user: current_user))
-  end
-  def admin_nt(conn) do
-    # get user if logged in
-    session_user = conn.private.plug_session["user_id"]
-
-    current_user =
-      case session_user do
-        nil -> nil
-        _ -> User.get(session_user)
-      end
-      send_resp(conn, 200, srender("admin/new", user: current_user))
-  end
 
   def error(conn), do: send_resp(conn, 200, srender("views/error", []))
 

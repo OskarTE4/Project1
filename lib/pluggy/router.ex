@@ -26,14 +26,14 @@ defmodule Pluggy.Router do
 
   get("/", do: PageLoader.index(conn))
   get("/error", do: PageLoader.error(conn))
-  get("/teacher/home", do: PageLoader.teacher_home(conn))
-  get("/teacher/play", do: PageLoader.teacher_play(conn))
-  get("/admin/new", do: PageLoader.admin_nt(conn))
-  get("/admin/home", do: PageLoader.admin_home(conn))
+  get("/teacher/home", do: TeacherController.home(conn))
+  get("/teacher/play", do: TeacherController.play(conn))
+  get("/admin/new", do: AdminController.nt(conn))
+  get("/admin/home", do: AdminController.home(conn))
 
   post("/logout", do: UserController.logout(conn))
   post("/login", do: UserController.login(conn, conn.body_params))
-  post("/newT", do: UserController.add_teacher(conn, conn.body_params))
+  post("/newT", do: TeacherController.add_new(conn, conn.body_params))
 
   match _ do
     send_resp(conn, 404, "oops")

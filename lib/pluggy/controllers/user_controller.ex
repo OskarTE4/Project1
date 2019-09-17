@@ -29,7 +29,6 @@ defmodule Pluggy.UserController do
         _ ->
           id = Enum.at(result.rows, 0) |> Enum.at(0)
           password = Enum.at(result.rows, 0) |> Enum.at(2)
-          IO.inspect(password)
           # make sure password is correct
           if password == pwd do
             Plug.Conn.put_session(conn, :user_id, id)
@@ -39,15 +38,6 @@ defmodule Pluggy.UserController do
           end
       end
     end
-  end
-
-  @spec add_teacher(Plug.Conn.t(), nil | keyword | map) :: Plug.Conn.t()
-  def add_teacher(conn, params) do
-    Postgrex.query!(DB, "INSERT INTO teachers (name, password, rights)
-                        VALUES('#{params["name"]}', '#{params["pwd"]}', false)",
-                        [],
-                        pool: DBConnection.Poolboy)
-    redirect(conn, "/home")
   end
 
   def logout(conn) do
