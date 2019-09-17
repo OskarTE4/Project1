@@ -40,7 +40,8 @@ defmodule Pluggy.Seed do
     Postgrex.query!(DB, "CREATE TABLE groups(
                         id SERIAL PRIMARY KEY,
                         name VARCHAR(255) NOT NULL,
-                        school INTEGER NOT NULL)",
+                        school INTEGER NOT NULL),
+                        image TEXT",
                         [],
                         pool: DBConnection.Poolboy)
   end

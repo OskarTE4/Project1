@@ -1,6 +1,6 @@
 defmodule Pluggy.Template do
   def srender(file, data \\ [], layout \\ true) do
-    {:ok, template} = File.read("templates/#{file}.slime")
+    {:ok, template} = File.read("templates/views/#{file}.slime")
 
     case layout do
       true ->
