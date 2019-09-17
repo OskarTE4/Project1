@@ -3,6 +3,8 @@ defmodule Pluggy.Router do
 
   alias Pluggy.PageLoader
   alias Pluggy.UserController
+  alias Pluggy.AdminController
+  alias Pluggy.TeacherController
 
   plug(Plug.Static, at: "/", from: :pluggy)
   plug(:put_secret_key_base)
