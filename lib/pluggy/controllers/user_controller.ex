@@ -35,8 +35,13 @@ defmodule Pluggy.UserController do
 
           # make sure password is correct
           if pwd == pwd do
-            Plug.Conn.put_session(conn, :user_id, id)
-            |> redirect("/home")
+            if username != "Admin" do
+              Plug.Conn.put_session(conn, :user_id, id)
+              |> redirect("/teacher/home")
+            else
+              Plug.Conn.put_session(conn, :user_id, id)
+              |> redirect("/admin/new")
+            end
           else
             redirect(conn, "/error")
           end
