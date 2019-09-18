@@ -1,5 +1,7 @@
 defmodule Pluggy.Seed do
 
+  # mix run -e Pluggy.Seed.run  //TO RUN
+
   def run() do
     reset_admin()
     reset_teachers()
@@ -53,7 +55,7 @@ defmodule Pluggy.Seed do
                         id SERIAL PRIMARY KEY,
                         name VARCHAR(100) NOT NULL,
                         group_id INTEGER NOT NULL,
-                        image TEXT",
+                        image TEXT)",
                         [],
                         pool: DBConnection.Poolboy)
   end
