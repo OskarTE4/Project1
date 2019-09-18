@@ -72,7 +72,6 @@ defmodule Pluggy.AdminController do
 
       school_list = Postgrex.query!(DB, "SELECT * FROM schools", [], pool: DBConnection.Poolboy)
       schools = Schools.to_struct_list(school_list.rows)
-      #Vad händer här med locals?
       send_resp(conn, 200, srender("admin/students", locals: %{user: current_user, groups: groups, schools: schools}))
   end
   def new_student(conn, params) do

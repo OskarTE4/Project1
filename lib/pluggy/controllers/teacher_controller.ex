@@ -2,6 +2,8 @@ defmodule Pluggy.TeacherController do
   require IEx
 
   alias Pluggy.User
+  alias Pluggy.Groups
+  alias Pluggy.Schools
   import Pluggy.Template, only: [srender: 2]
   import Plug.Conn, only: [send_resp: 3]
 
@@ -16,18 +18,16 @@ defmodule Pluggy.TeacherController do
       end
 
       id = current_user.id
-      IO.inspect id
+
       #TODO change this to a JOIN query instead of two SQL querys
 
-      connection = Postgrex.query!(DB, "SELECT school_id FROM teachers_schools WHERE teacher_id = $1", [id], pool: DBConnection.Poolboy)
-      IO.inspect connection
-      id = Enum.at(connection.rows, 0) |> Enum.at(0)
-      groups = Enum.map(connection, &(Postgrex.query!(DB, "SELECT * FROM groups WHERE school = $1", [&1], pool: DBConnection.Poolboy)))
-      IO.puts("Info")
-      IO.inspect id
-      IO.inspect connection
-      IO.inspect groups
-      send_resp(conn, 200, srender("teacher/home", locals: %{user: current_user, groups: groups}))
+      connection = Postgrex.query!(DB, "SELECT * FROM teachers_schools WHERE teacher_id = $1", [id], pool: DBConnection.Poolboy)
+      schools = Schools.to_struct_list(connection.rows)
+
+      group_list = Postgrex.query!(DB, "SELECT * FROM groups WHERE school = $1", [id], pool: DBConnection.Poolboy)
+      groups = Groups.to_struct_list(group_list.rows)
+
+      send_resp(conn, 200, srender("teacher/home", locals: %{user: current_user, groups: groups, schools: schools}))
   end
 
   @spec add_new(Plug.Conn.t(), nil | keyword | map) :: Plug.Conn.t()
