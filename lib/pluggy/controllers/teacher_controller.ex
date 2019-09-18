@@ -21,9 +21,9 @@ defmodule Pluggy.TeacherController do
 
       connection = Postgrex.query!(DB, "SELECT school_id FROM teachers_schools WHERE teacher_id = $1", [id], pool: DBConnection.Poolboy)
 
-      groups = Enum.map(connection, &(Postgrex.query!(DB, "SELECT * FROM groups WHERE school = $1", [&1], pool: DBConnection.Poolboy)))
+      grouplist = Enum.map(connection, &(Postgrex.query!(DB, "SELECT * FROM groups WHERE school = $1", [&1], pool: DBConnection.Poolboy)))
 
-      send_resp(conn, 200, srender("teacher/home", groups))
+      send_resp(conn, 200, srender("admin/new", locals: %{user: current_user, groups: grouplist}))
   end
 
   @spec add_new(Plug.Conn.t(), nil | keyword | map) :: Plug.Conn.t()
