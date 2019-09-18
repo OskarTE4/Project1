@@ -1,0 +1,14 @@
+-IO.inspect(locals)
+form action="/newSt" method="post"
+            label for="name" Name
+            input type="text" name="name" id="username"
+            select form="group" name="group" 
+                =for group <- locals.groups do   
+                    option name="group" value="#{group.id}" #{group.name}
+            select form="school" name="school"
+                =for school <- locals.schools do
+                    option name="school" value="#{school.id}" #{school.name}
+            label for="img" Image
+            input type="file" name="img" accept="image/*"
+            button type="submit" Create new student
+           

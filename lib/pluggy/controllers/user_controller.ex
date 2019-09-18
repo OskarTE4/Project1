@@ -39,7 +39,6 @@ defmodule Pluggy.UserController do
       end
     end
   end
-
   def logout(conn) do
     Plug.Conn.configure_session(conn, drop: true)
     |> redirect("/")
