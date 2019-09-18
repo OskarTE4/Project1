@@ -4,6 +4,7 @@ defmodule Pluggy.Seed do
     reset_admin()
     reset_teachers()
     reset_groups()
+    reset_students()
     reset_schools()
     reset_teachers_schools()
   end
@@ -42,6 +43,17 @@ defmodule Pluggy.Seed do
                         name VARCHAR(255) NOT NULL,
                         school INTEGER NOT NULL,
                         image TEXT)",
+                        [],
+                        pool: DBConnection.Poolboy)
+  end
+
+  defp reset_students() do
+    Postgrex.query!(DB, "DROP TABLE IF EXISTS students", [], pool: DBConnection.Poolboy)
+    Postgrex.query!(DB, "CREATE TABLE students(
+                        id SERIAL PRIMARY KEY,
+                        name VARCHAR(100) NOT NULL,
+                        group_id INTEGER NOT NULL,
+                        image TEXT",
                         [],
                         pool: DBConnection.Poolboy)
   end

@@ -27,7 +27,7 @@ defmodule Pluggy.TeacherController do
       IO.inspect id
       IO.inspect connection
       IO.inspect groups
-      send_resp(conn, 200, srender("teacher/home", groups))
+      send_resp(conn, 200, srender("teacher/home", locals: %{user: current_user, groups: groups}))
   end
 
   @spec add_new(Plug.Conn.t(), nil | keyword | map) :: Plug.Conn.t()
