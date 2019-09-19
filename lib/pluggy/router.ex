@@ -3,6 +3,9 @@ defmodule Pluggy.Router do
 
   alias Pluggy.PageLoader
   alias Pluggy.UserController
+  alias Pluggy.AdminController
+  alias Pluggy.TeacherController
+  alias Pluggy.GameController
 
   plug(Plug.Static, at: "/", from: :pluggy)
   plug(:put_secret_key_base)
@@ -23,10 +26,21 @@ defmodule Pluggy.Router do
   plug(:dispatch)
 
   get("/", do: PageLoader.index(conn))
-  post("/users/login", do: UserController.login(conn, conn.body_params))
-
+  get("/error", do: PageLoader.error(conn))
+  get("/teacher/home", do: TeacherController.home(conn))
+  get("/teacher/group/:id", do: GameController.showG(conn, id))
+  get("/admin/new", do: AdminController.nt(conn))
+  get("/admin/home", do: AdminController.home(conn))
+  get("/admin/schools", do: AdminController.ns(conn))
+  get("/admin/students", do: AdminController.nst(conn))
+  get("/admin/groups", do: AdminController.ng(conn))
 
   post("/logout", do: UserController.logout(conn))
+  post("/login", do: UserController.login(conn, conn.body_params))
+  post("/newT", do: TeacherController.add_new(conn, conn.body_params))
+  post("/newS", do: AdminController.add_new(conn, conn.body_params))
+  post("/newG", do: AdminController.new_group(conn, conn.body_params))
+  post("/newSt", do: AdminController.new_student(conn, conn.body_params))
 
   match _ do
     send_resp(conn, 404, "oops")

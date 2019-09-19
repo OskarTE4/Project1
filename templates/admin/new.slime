@@ -1,0 +1,14 @@
+= if locals.user == nil do
+    h1 No access
+    p You do not have the rights to view or use this page of What's their face. Please go back to home
+    a href="/teacher/home" go back
+- else
+    form action="/newT" method="post"
+            label for="name" Username
+            input type="text" name="name" id="username"
+            label for="pwd" Password
+            input type="text" name="pwd" id="password"
+            select name="school"
+                =for school <- locals.schools do
+                    option name="id" value="#{school.id}" #{school.name}
+            button type="submit" Create new teacher

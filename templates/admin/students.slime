@@ -1,0 +1,19 @@
+form action="/newSt" method="post"
+            label for="name" Name:
+            input type="text" name="name" id="username"
+            br
+            label for="group" Group:
+            select name="group" 
+                =for group <- locals.groups do   
+                    option value="#{group.id}" #{group.name}
+            br
+            label for="school" School:
+            select name="school"
+                =for school <- locals.schools do
+                    option value="#{school.id}" #{school.name}
+            br
+            label for="img" Image:
+            input type="file" name="img" accept="image/*" required="required"
+            br
+            button type="submit" Create new student
+           

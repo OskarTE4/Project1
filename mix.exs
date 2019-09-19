@@ -27,7 +27,8 @@ defmodule Pluggy.MixProject do
       {:postgrex, "~> 0.13.5"},
       {:poolboy, "1.5.1"},
       {:bcrypt_elixir, "~> 1.0"},
-      {:slime, "~> 1.2"}
+      {:slime, "~> 1.2"},
+      {:secure_random, "~> 0.5"}
     ]
   end
 end

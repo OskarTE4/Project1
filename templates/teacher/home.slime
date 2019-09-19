@@ -1,0 +1,15 @@
+/ for each group in groups where school id is equal to teacher id in connection
+- IO.inspect locals
+=for group <- locals.groups do
+    div
+        a href="/play/group.id"
+        img src="group.img"
+        p #{group.name} - #{group.school}
+
+
+/ If there are is no school asigned to the teacher
+
+div
+    h3 Error: no group
+    p No groups have been asigned to you, either talk to the admin or complain into the ether.
+    

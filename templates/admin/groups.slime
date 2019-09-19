@@ -1,0 +1,6 @@
+form action="/newG" method="post"
+            label for="name" Name
+            input type="text" name="name" id="username"
+            label for="school" School
+            input type="text" name="school" id="school"
+            button type="submit" Create new group
