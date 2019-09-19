@@ -1,8 +1,8 @@
-= for student <- locals.students do
-    div
-        img src="#{student.image}"
-        h3 student.name
-    button 
-        h href="/" 
-            div
-                p You ready to take the quiz? If so, press this button
+/ = for student <- locals.students do
+/     div
+/         img src="#{student.image}"
+/         h3 student.name
+button 
+    a href="/get-groups" 
+        div
+            p You ready to take the quiz? If so, press this button

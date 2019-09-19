@@ -23,6 +23,7 @@ defmodule Pluggy.MixProject do
   # Run "mix help deps" to learn about dependencies.
   def deps do
     [
+      {:poison, "~> 3.1"},
       {:plug_cowboy, "~> 2.0"},
       {:postgrex, "~> 0.13.5"},
       {:poolboy, "1.5.1"},

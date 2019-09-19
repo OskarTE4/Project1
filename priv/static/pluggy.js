@@ -1,5 +1,6 @@
 function game(students) {
-
+    students = JSON.parse(students)
+    console.log(students)
     used_students = []
     points = 0
     for(var i =0; i < students.length; i++) {

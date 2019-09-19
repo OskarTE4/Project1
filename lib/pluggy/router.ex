@@ -6,6 +6,7 @@ defmodule Pluggy.Router do
   alias Pluggy.AdminController
   alias Pluggy.TeacherController
   alias Pluggy.GameController
+  alias Pluggy.Students
 
   plug(Plug.Static, at: "/", from: :pluggy)
   plug(:put_secret_key_base)
@@ -34,7 +35,10 @@ defmodule Pluggy.Router do
   get("/admin/schools", do: AdminController.ns(conn))
   get("/admin/students", do: AdminController.nst(conn))
   get("/admin/groups", do: AdminController.ng(conn))
-  get("/test", do: GameController.startG(conn))
+  get("/teacher/:id/play", do: Students.get(conn, id))
+# get("/preload/:id", do: PageLoader.preload(conn, id))
+# get("/get-groups", do: Pageloader.get_group(conn))
+  get("/get-students/:id", do: Students.api_get(conn, id))
 
   post("/logout", do: UserController.logout(conn))
   post("/login", do: UserController.login(conn, conn.body_params))

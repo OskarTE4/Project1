@@ -1,7 +1,7 @@
 defmodule Pluggy.GameController do
 
   alias Pluggy.User
-  alias Pluggy.Class
+  alias Pluggy.Groups
   import Pluggy.Template, only: [srender: 2]
   import Plug.Conn, only: [send_resp: 3]
 
@@ -29,17 +29,18 @@ defmodule Pluggy.GameController do
     # get user if logged in
     session_user = conn.private.plug_session["user_id"]
 
+    id = 1
+
     current_user =
       case session_user do
         nil -> nil
         _ -> User.get(session_user)
       end
 
-      class_list = Postgrex.query!(DB, "SELECT * FROM students WHERE groups = 1", [], pool: DBConnection.Poolboy)
+      class_list = Postgrex.query!(DB, "SELECT * FROM students WHERE groups = $1", [id], pool: DBConnection.Poolboy)
+      group = Groups.to_struct_list(class_list.rows)
 
-      send_resp(conn, 200, srender("testGame", locals: %{user: current_user, students: class_list}))
-
-
+      send_resp(conn, 200, srender("testGame", locals: %{user: current_user, students: group}))
   end
 
 end

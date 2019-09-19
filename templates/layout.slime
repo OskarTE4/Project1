@@ -1,9 +1,8 @@
 doctype html
 html
-   head
+    head
        title Whats Their Face v2
        link rel="stylesheet" type="text/css" href="/pluggy.css"
-       script type="text/javascript" src="pluggy.js"
        meta charset="UTF-8"
-   body
-   = template
+    body
+        = template

@@ -18,6 +18,16 @@ defmodule Pluggy.PageLoader do
     send_resp(conn, 200, srender("views/index", user: current_user))
   end
 
+  # def preload(id) do
+  #   get_group(id)
+  # end
+
+
+  # def get_group(id) do
+  #   group = Postgrex.query!(DB, "SELECT * FROM groups WHERE id = $1", [id], pool: DBConnection.Poolboy)
+  #   send_resp(conn, 200, srender("/get-students/#{id}", [group]))
+  # end
+
   def error(conn), do: send_resp(conn, 200, srender("views/error", []))
 
   defp redirect(conn, url) do

@@ -1,3 +1,105 @@
-span class="" onclick="game()"
+a href="#" id="gameArea" class="" onclick="get_students('#{locals.group}'); return false;"
     p class="" Are you ready to start?
     p class="" If you think you are, click here.
+
+javascript: 
+    function get_students(id){
+        var xhr = new XMLHttpRequest();
+
+        // Setup our listener to process completed requests
+        xhr.onload = function () {
+
+            // Process our return data
+            if (xhr.status >= 200 && xhr.status < 300) {
+                // What do when the request is successful
+                console.log('success!', xhr);
+                list = JSON.parse(xhr.response)
+                game(list)
+            } else {
+                // What do when the request fails
+                console.log('The request failed!');
+            }
+
+            // Code that should run regardless of the request status
+            console.log('This always runs...');
+        };
+
+        // Create and send a GET request
+        // The first argument is the post type (GET, POST, PUT, DELETE, etc.)
+        // The second argument is the endpoint URL
+        xhr.open('GET', `/get-students/${id}`);
+        xhr.send();
+        
+    }
+    function game(list) {
+
+        /groups/${id}/students
+        students = list
+        console.log(students)
+        used_students = []
+        points = 0
+        for(var i =0; i < students.length; i++) {
+            other_names = []
+            correct = false
+            current_student = random(students)
+            while(used_students.include(current_student)){
+                current_student = random(students)
+            }
+            while(other_names.length <= 3) {
+                other_names << random(students.name)
+                if(other_names.include(current_student)){
+                    remove(other_names, current_student.name)
+                }
+            }
+            document.getElementById("imgArea").innerHTML = `<img src="${current_student.image}">`
+            other_names << current_student.name
+            for(var i = 0; i < 5; i++){
+                name = []
+                name << random(other_names)
+                if(name == current_student.name){
+                    document.getElementById("nameArea").innerHTML = `<div id="option${i} current" class="names"> ${name} </div>`
+                } else{
+                    document.getElementById("nameArea").innerHTML = `<div id="option${i}" class="names"> ${name} </div>`
+                }
+                remove(other_names, name)
+            }
+            if(document.getElementsByClassName("names").addEventListener("click", choice(current_student.name)) == true){
+                points = points + 1
+            };
+            
+            used_students << current_student
+    }
+    document.body.innerHTML = ""
+    document.body.innerHTML = `<span class="">
+                                    <a href="teachers/home" class="">
+                                        <div class="">
+                                            <p> You got ${points} out of ${students.length}. \n Press this button to go back home.</p>
+                                        </div>
+                                    </a>
+                                </span>`
+
+    }
+
+    function choice(cName) {
+        pickedName = this.textContent
+        if(pickedName === cName){
+            document.getElementById("current").classList.add("correct")
+            return true
+        } else{
+            document.getElementById("").classList.add("wrong")
+            document.getElementById("current").classList.add("right")
+            return false
+        }
+    }
+
+    function remove(arr, value){
+
+        return arr.filter(function(ele){
+            return ele != value
+        })
+
+    }
+
+    function random(arr){
+        return arr[Math.floor(Math.random() * arr.length)]
+    }

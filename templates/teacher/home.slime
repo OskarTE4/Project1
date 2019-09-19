@@ -5,6 +5,7 @@
         img src="#{group.img}"
         p #{group.name} - #{group.school}
         a href="/teacher/group/#{group.id}/" Check out the class
+        a href="/teacher/#{group.id}/play" Play now
 
 
 / If there are is no school asigned to the teacher

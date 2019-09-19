@@ -18,13 +18,14 @@ defmodule Pluggy.TeacherController do
       end
 
       id = current_user.id
-
+      IO.inspect id
       #TODO change this to a JOIN query instead of two SQL querys
 
       connection = Postgrex.query!(DB, "SELECT * FROM teachers_schools WHERE teacher_id = $1", [id], pool: DBConnection.Poolboy)
       schools = Schools.to_struct_list(connection.rows)
-
-      group_list = Postgrex.query!(DB, "SELECT * FROM groups WHERE school = $1", [id], pool: DBConnection.Poolboy)
+      IO.inspect schools
+      IEx; IEx.pry
+      group_list = Postgrex.query!(DB, "SELECT * FROM groups WHERE school = $1", [schools.id], pool: DBConnection.Poolboy)
       groups = Groups.to_struct_list(group_list.rows)
 
       send_resp(conn, 200, srender("teacher/home", locals: %{user: current_user, groups: groups, schools: schools}))
