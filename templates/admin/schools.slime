@@ -1,0 +1,9 @@
+= if user == nil do
+    h1 No access
+    p You do not have the rights to view or use this page of What's their face. Please go back to home
+    a href="/teacher/home" go back
+- else
+    form action="/newS" method="post"
+            label for="name" Name
+            input type="text" name="name" id="name"
+            button type="submit" Create new School
