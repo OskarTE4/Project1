@@ -1,4 +1,39 @@
-a href="/admin/new" Lägg till en ny lärare
-a href="/admin/schools" Lägg till skola
-a href="/admin/students" Lägg till elev
-a href="/admin/groups" Lägg till en klass
+div class="topwhite"
+div class="adding"
+    div class="schoolT"
+        h1 Skolor
+        div class="boxS"
+            =for school <- locals.schools do
+                div class="eachS"
+                    h4 #{school.name}
+                    div class="edit"
+                        h4 
+                            a href="/admin/teacher/#{school.name}" EDIT
+                    div class="remove"
+                        h4
+                            a href="/admin/teacher/remove" REMOVE
+            div class="school"
+                a href="/admin/schools" NEW
+    / div class="boxSt"
+    /     div class="student"
+    /         a href="/admin/students" Lägg till elev
+    / div class="boxG"     
+    /     div class="group"
+    /         a href="/admin/groups" Lägg till en klass
+    div class="teacherT"  
+        h1 TEACHERS  
+        div class="boxT"
+        -IO.inspect locals.teachers
+            =for teacher <- locals.teachers do 
+                div class="eachT"
+                    h4 #{teacher.name}
+                    div class="edit"
+                        h4 
+                            a href="/admin/teacher/edit" Edit
+                    div class="remove"
+                        h4
+                            a href="/admin/teacher/remove" Remove
+            div class="teacher"
+                a href="/admin/new" NEW 
+
+        

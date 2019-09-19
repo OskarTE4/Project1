@@ -1,5 +1,7 @@
 defmodule Pluggy.Seed do
 
+  # mix run -e Pluggy.Seed.run  //TO RUN
+
   def run() do
     reset_admin()
     reset_teachers()
