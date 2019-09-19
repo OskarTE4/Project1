@@ -34,6 +34,8 @@ defmodule Pluggy.Router do
   get("/admin/schools", do: AdminController.ns(conn))
   get("/admin/students", do: AdminController.nst(conn))
   get("/admin/groups", do: AdminController.ng(conn))
+  get("/admin/teacher/:schools", do: AdminController.schools(conn))
+
 
   post("/logout", do: UserController.logout(conn))
   post("/login", do: UserController.login(conn, conn.body_params))

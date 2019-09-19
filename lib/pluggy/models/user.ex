@@ -14,4 +14,8 @@ defmodule Pluggy.User do
   def to_struct([[id, username]]) do
     %User{id: id, username: username}
   end
+  def to_struct_list(rows) do
+    for [id, name] <- rows, do: %User{id: id, username: name}
+  end
+
 end

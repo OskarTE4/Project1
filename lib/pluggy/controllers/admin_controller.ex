@@ -19,8 +19,9 @@ defmodule Pluggy.AdminController do
       end
       schools = Postgrex.query!(DB, "SELECT * FROM schools", [], pool: DBConnection.Poolboy)
       schoollist = Schools.to_struct_list(schools.rows)
-      teachers = Postgrex.query!(DB, "SELECT * FROM teachers", [], pool: DBConnection.Poolboy)
-      teacherslist = Schools.to_struct_list(teachers.rows)
+      teachers = Postgrex.query!(DB, "SELECT id, name FROM teachers", [], pool: DBConnection.Poolboy) |> IO.inspect(label: "sql")
+      teacherslist = User.to_struct_list(teachers.rows)
+      |> IO.inspect(label: "teachers")
       send_resp(conn, 200, srender("admin/home", locals: %{user: current_user, schools: schoollist, teachers: teacherslist}))
   end
 
@@ -75,7 +76,7 @@ defmodule Pluggy.AdminController do
 
       school_list = Postgrex.query!(DB, "SELECT * FROM schools", [], pool: DBConnection.Poolboy)
       schools = Schools.to_struct_list(school_list.rows)
-      
+
       send_resp(conn, 200, srender("admin/students", locals: %{user: current_user, groups: groups, schools: schools}))
   end
   def new_student(conn, params) do
@@ -90,7 +91,7 @@ defmodule Pluggy.AdminController do
 
     dir = "../students/"
     img_path = "#{dir}" <> "#{params["img"]}"
-  
+
 
     Postgrex.query!(DB, "INSERT INTO students (name, groups, school, image)
                         VALUES('#{params["name"]}', #{params["group"]}, #{params["school"]}, '#{img_path}')",
@@ -134,7 +135,20 @@ defmodule Pluggy.AdminController do
   send_resp(conn, 200, srender("/admin/home", user: current_user))
   end
 
-  defp redirect(conn, url),
-    do: Plug.Conn.put_resp_header(conn, "location", url) |> send_resp(303, "")
+  defp redirect(conn, url), do: Plug.Conn.put_resp_header(conn, "location", url) |> send_resp(303, "")
+
+  def schools(conn) do
+    # get user if logged in
+    session_user = conn.private.plug_session["user_id"]
+    #TODO: Ändra så att det kollas om användaren är en admin
+    current_user =
+      case session_user do
+        nil -> nil
+        _ -> User.get(session_user)
+      end
+      schools = Postgrex.query!(DB, "SELECT * FROM schools", [], pool: DBConnection.Poolboy)
+      schoollist = Schools.to_struct_list(schools.rows)
+      send_resp(conn, 200, srender("admin/teacher/:schools", locals: %{user: current_user, schools: schoollist}))
+  end
 
 end
