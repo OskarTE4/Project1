@@ -24,9 +24,9 @@ div class="adding"
         h1 TEACHERS  
         div class="boxT"
         -IO.inspect locals.teachers
-            =for teacher <- locals.teachers do 
+            =for teachers <- locals.teachers do 
                 div class="eachT"
-                    h4 #{teacher.name}
+                    h4 #{teachers.name}
                     div class="edit"
                         h4 
                             a href="/admin/teacher/edit" Edit

@@ -9,6 +9,7 @@ body {
     padding: 0px 10px;
     background-color: #2239d4;
     height:100px;
+    color:white;  
  }
  .login {
     border:0px solid red;
@@ -17,7 +18,7 @@ body {
     width:250px;
     float:center;
     margin:auto;
-    border:px solid black;
+    border:0px solid black;
     border-radius:6px;
  }
  input{
@@ -30,6 +31,27 @@ body {
     border-radius: 9px;
     border:1px solid #2239d4;
  }
+ .newS {
+   margin:auto;
+   padding:200px 0px;
+   text-align:center;
+   border:0px solid black;
+   font-size:28px;
+   color:#2239d4;
+ }
+ .newT {
+   margin:auto;
+   padding:100px 0px;
+   text-align:center;
+   border:0px solid black;
+   font-size:28px;
+   color:#2239d4;
+   width:300px;
+ }
+
+    
+
+ 
  button{
     background-color: #2239d4;
     border: 0px solid white;

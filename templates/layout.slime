@@ -6,6 +6,6 @@ html
        meta charset="UTF-8"
    body
    div class="nav"
-        h1 Whats Their Face v2
+            h1 Whats Their Face v2
         
    = template
