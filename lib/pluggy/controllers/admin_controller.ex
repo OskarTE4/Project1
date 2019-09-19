@@ -86,7 +86,9 @@ defmodule Pluggy.AdminController do
 
     dir = "../students/"
     img_path = "#{dir}" <> "#{params["img"]}"
-  
+
+    IO.inspect params["group"].to_i
+
 
     Postgrex.query!(DB, "INSERT INTO students (name, groups, school, image)
                         VALUES('#{params["name"]}', #{params["group"]}, #{params["school"]}, '#{img_path}')",

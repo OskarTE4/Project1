@@ -2,9 +2,9 @@
 - IO.inspect locals
 =for group <- locals.groups do
     div
-        a href="/play/group.id"
-        img src="group.img"
+        img src="#{group.img}"
         p #{group.name} - #{group.school}
+        a href="/teacher/group/#{group.id}/" Check out the class
 
 
 / If there are is no school asigned to the teacher
