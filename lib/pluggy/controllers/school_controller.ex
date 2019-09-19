@@ -1,10 +1,10 @@
-defmodule Pluggy.School do
+defmodule Pluggy.Schools do
   defstruct(id: nil, name: "")
-  alias Pluggy.School
+  alias Pluggy.Schools
   def to_struct([id, name]) do
-    %School{id: id, name: name}
+    %Schools{id: id, name: name}
   end
   def to_struct_list(rows) do
-    for [id, name] <- rows, do: %School{id: id, name: name}
+    for [id, name] <- rows, do: %Schools{id: id, name: name}
   end
 end

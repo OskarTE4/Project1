@@ -32,11 +32,15 @@ defmodule Pluggy.Router do
   get("/admin/new", do: AdminController.nt(conn))
   get("/admin/home", do: AdminController.home(conn))
   get("/admin/schools", do: AdminController.ns(conn))
+  get("/admin/students", do: AdminController.nst(conn))
+  get("/admin/groups", do: AdminController.ng(conn))
 
   post("/logout", do: UserController.logout(conn))
   post("/login", do: UserController.login(conn, conn.body_params))
   post("/newT", do: TeacherController.add_new(conn, conn.body_params))
   post("/newS", do: AdminController.add_new(conn, conn.body_params))
+  post("/newG", do: AdminController.new_group(conn, conn.body_params))
+  post("/newSt", do: AdminController.new_student(conn, conn.body_params))
 
   match _ do
     send_resp(conn, 404, "oops")

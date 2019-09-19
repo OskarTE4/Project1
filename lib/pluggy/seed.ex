@@ -41,8 +41,8 @@ defmodule Pluggy.Seed do
     Postgrex.query!(DB, "CREATE TABLE groups(
                         id SERIAL PRIMARY KEY,
                         name VARCHAR(255) NOT NULL,
-                        school INTEGER NOT NULL),
-                        image TEXT",
+                        school INTEGER NOT NULL,
+                        image TEXT)",
                         [],
                         pool: DBConnection.Poolboy)
   end
@@ -51,9 +51,10 @@ defmodule Pluggy.Seed do
     Postgrex.query!(DB, "DROP TABLE IF EXISTS students", [], pool: DBConnection.Poolboy)
     Postgrex.query!(DB, "CREATE TABLE students(
                         id SERIAL PRIMARY KEY,
-                        name VARCHAR(100) NOT NULL,
-                        group_id INTEGER NOT NULL,
-                        image TEXT",
+                        name VARCHAR(255) NOT NULL,
+                        groups INTEGER NOT NULL,
+                        school INTEGER NOT NULL,
+                        image TEXT)",
                         [],
                         pool: DBConnection.Poolboy)
   end
@@ -76,8 +77,5 @@ defmodule Pluggy.Seed do
                         pool: DBConnection.Poolboy)
   end
 end
-
-
-
 
 

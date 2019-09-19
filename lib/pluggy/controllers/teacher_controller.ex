@@ -2,6 +2,8 @@ defmodule Pluggy.TeacherController do
   require IEx
 
   alias Pluggy.User
+  alias Pluggy.Groups
+  alias Pluggy.Schools
   import Pluggy.Template, only: [srender: 2]
   import Plug.Conn, only: [send_resp: 3]
 
@@ -19,11 +21,13 @@ defmodule Pluggy.TeacherController do
 
       #TODO change this to a JOIN query instead of two SQL querys
 
-      connection = Postgrex.query!(DB, "SELECT school_id FROM teachers_schools WHERE teacher_id = $1", [id], pool: DBConnection.Poolboy)
+      connection = Postgrex.query!(DB, "SELECT * FROM teachers_schools WHERE teacher_id = $1", [id], pool: DBConnection.Poolboy)
+      schools = Schools.to_struct_list(connection.rows)
 
-      grouplist = Enum.map(connection, &(Postgrex.query!(DB, "SELECT * FROM groups WHERE school = $1", [&1], pool: DBConnection.Poolboy)))
+      group_list = Postgrex.query!(DB, "SELECT * FROM groups WHERE school = $1", [id], pool: DBConnection.Poolboy)
+      groups = Groups.to_struct_list(group_list.rows)
 
-      send_resp(conn, 200, srender("teacher/home", locals: %{user: current_user, groups: grouplist}))
+      send_resp(conn, 200, srender("teacher/home", locals: %{user: current_user, groups: groups, schools: schools}))
   end
 
   @spec add_new(Plug.Conn.t(), nil | keyword | map) :: Plug.Conn.t()
@@ -34,7 +38,6 @@ defmodule Pluggy.TeacherController do
                         pool: DBConnection.Poolboy)
     list = Postgrex.query!(DB, "SELECT id FROM teachers WHERE name = $1", [params["name"]], pool: DBConnection.Poolboy)
     id = Enum.at(list.rows, 0) |> Enum.at(0)
-    IO.inspect params["school"]
     Postgrex.query!(DB, "INSERT INTO teachers_schools (teacher_id, school_id)
                         VALUES('#{id}', '#{params["school"]}')", [], pool: DBConnection.Poolboy)
     redirect(conn, "/admin/home")

@@ -1,2 +1,4 @@
 a href="/admin/new" Lägg till en ny lärare
 a href="/admin/schools" Lägg till skola
+a href="/admin/students" Lägg till elev
+a href="/admin/groups" Lägg till en klass
