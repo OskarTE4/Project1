@@ -7,7 +7,7 @@
             label for="name" Username
             input type="text" name="name" id="username"
             label for="pwd" Password
-            input type="text" name="pwd" id="password"
+            input type="password" name="pwd" id="password"
             select name="school"
                 =for school <- locals.schools do
                     option name="id" value="#{school.id}" #{school.name}

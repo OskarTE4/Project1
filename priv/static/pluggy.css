@@ -62,7 +62,7 @@ body {
  }
 
  .topwhite{
-    border:1px solid green;
+    border:0px solid green;
     float:left;
     width:100%;
     height:60px;
@@ -129,22 +129,47 @@ body {
     padding: 15px 32px;
     text-align: center;
     display: inline-block;
-    font-size: 29px;
+    font-size: 30px;
     margin:6px 50px;
     border-radius: 9px;
 
     
  }
+ .eachS{
+   border:0px solid red;
+   float:left;
+   flex:1;
+   background-color:#6592fc;
+   color:white;
+   font-size: 20px;
+   margin:0px 10px;
+   border-radius: 9px;
+
+ }
+ .schoolT{
+   border:0px solid black;
+   color:#6592fc;
+   text-align:center;
+ }
+ .boxS{
+   border:0px solid black;
+   width:100%;
+   height:100%;
+   text-align:center;
+   color:#6592fc;
+   display:flex;
+   flex-wrap: wrap;
+ }
  .school{
-    width:100%;
-    border:0px black solid;
-    float:left;
-    margin:5px 0px; 
-    background-color:#2239d4;
-    color:#65c2e0;
-    height: 40px;
-    border-radius: 9px;
-    font-size: 16px;
+   background-color: #2239d4;
+   border: 0px solid white;
+   color: #6592fc;
+   padding: 15px 32px;
+   text-align: center;
+   display: inline-block;
+   font-size: 30px;
+   margin:6px 50px;
+   border-radius: 9px;
 }
  .student{
     width:100%;

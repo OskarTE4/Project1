@@ -17,8 +17,11 @@ defmodule Pluggy.AdminController do
         nil -> nil
         _ -> User.get(session_user)
       end
-      IO.inspect current_user
-      send_resp(conn, 200, srender("admin/home", user: current_user))
+      schools = Postgrex.query!(DB, "SELECT * FROM schools", [], pool: DBConnection.Poolboy)
+      schoollist = Schools.to_struct_list(schools.rows)
+      teachers = Postgrex.query!(DB, "SELECT * FROM teachers", [], pool: DBConnection.Poolboy)
+      teacherslist = Schools.to_struct_list(teachers.rows)
+      send_resp(conn, 200, srender("admin/home", locals: %{user: current_user, schools: schoollist, teachers: teacherslist}))
   end
 
   def nt(conn) do
@@ -33,7 +36,7 @@ defmodule Pluggy.AdminController do
 
       schools = Postgrex.query!(DB, "SELECT * FROM schools", [], pool: DBConnection.Poolboy)
       schoollist = Schools.to_struct_list(schools.rows)
-      IO.inspect schoollist
+
       send_resp(conn, 200, srender("admin/new", locals: %{user: current_user, schools: schoollist}))
   end
 
@@ -72,6 +75,7 @@ defmodule Pluggy.AdminController do
 
       school_list = Postgrex.query!(DB, "SELECT * FROM schools", [], pool: DBConnection.Poolboy)
       schools = Schools.to_struct_list(school_list.rows)
+      
       send_resp(conn, 200, srender("admin/students", locals: %{user: current_user, groups: groups, schools: schools}))
   end
   def new_student(conn, params) do
