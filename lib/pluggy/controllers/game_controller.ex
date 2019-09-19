@@ -25,4 +25,21 @@ defmodule Pluggy.GameController do
 
   end
 
+  def startG(conn) do
+    # get user if logged in
+    session_user = conn.private.plug_session["user_id"]
+
+    current_user =
+      case session_user do
+        nil -> nil
+        _ -> User.get(session_user)
+      end
+
+      class_list = Postgrex.query!(DB, "SELECT * FROM students WHERE groups = 1", [], pool: DBConnection.Poolboy)
+
+      send_resp(conn, 200, srender("testGame", locals: %{user: current_user, students: class_list}))
+
+
+  end
+
 end
