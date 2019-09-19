@@ -84,30 +84,14 @@ defmodule Pluggy.AdminController do
         _ -> User.get(session_user)
       end
 
-      type = params["img"]["type"]
-      tempfile = params["img"]["tempfile"]
-      img_name = SecureRandom.urlsafe_base64
+    dir = "../students/"
+    img_path = "#{dir}" <> "#{params["img"]}"
+    IO.inspect(img_path)
 
-      IO.inspect type
-      IO.inspect tempfile
-      IO.inspect img_name
-
-      ending = "hej"
-
-      if type == "image/jpeg" do
-        ending = "jpg"
-      end
-      if type == "image/png" do
-        ending = "png"
-      end
-      IO.inspect ending
-      img_path = "../../../priv/static/uploads/#{img_name}.#{ending}"
-      File.copy(tempfile, img_path)
-
-      Postgrex.query!(DB, "INSERT INTO students (name, class, image)
-      VALUES(#{params["name"]}, #{params["group"]}, img_path)",
-      [],
-      pool: DBConnection.Poolboy)
+    Postgrex.query!(DB, "INSERT INTO students (name, groups, school, image)
+                        VALUES('#{params["name"]}', #{params["group"]}, #{params["school"]}, '#{img_path}')",
+                        [],
+                        pool: DBConnection.Poolboy)
 
     send_resp(conn, 200, srender("/admin/home", user: current_user))
   end
