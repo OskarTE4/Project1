@@ -6,11 +6,13 @@ div class="topwhite"
                 div class="eachS"
                     h4 #{school.name}
                     div class="edit"
-                        h4 
-                            a href="/admin/teacher/#{school.name}" EDIT
-                    div class="remove"
                         h4
-                            a href="/admin/teacher/remove" REMOVE
+                            button EDIT
+                    div class="remove"
+                        h4    
+                            form action="/delete_school" method="post" 
+                                input type="hidden" name="school_id" value="#{school.id}"
+                                button type="submit" Delete
             div class="school"
                 a href="/admin/schools" NEW
     / div class="boxSt"
@@ -27,11 +29,17 @@ div class="topwhite"
                     h4 #{teachers.username}
                     div class="edit"
                         h4 
-                            a href="/admin/teacher/edit" Edit
+                            button EDIT
                     div class="remove"
-                        h4
-                            a href="/admin/teacher/remove" Remove
+                        h4   
+                            form action="/delete_teacher" method="post" 
+                                input type="hidden" name="teacher_id" value="#{teachers.id}"
+                                button type="submit" Delete
+
             div class="school"
-                a href="/admin/new" NEW 
+                a href="/admin/new" NEW
+
+    form action="/logout" method="post"
+        button type="submit" Log Out 
 
         

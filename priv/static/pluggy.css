@@ -51,7 +51,6 @@ body {
 
 
 
- 
  button{
     background-color: #2239d4;
     border: 0px solid white;
@@ -95,7 +94,7 @@ body {
     border:0px solid green;
     width:49%;
     float:left;
-    color:#6592fc;
+    color:green;
     font-size:15px;
    }
 
@@ -188,4 +187,27 @@ body {
    color: white;
    cursor: pointer;
    text-decoration: underline;
+}
+
+
+.quizpic {
+border:0px solid red;
+width:300px;
+height:300px;
+margin:5px;
+}
+.pic{
+   border:0px solid green;
+   text-align: center;
+}
+
+.correct:focus{
+   background-color: green;
+
+}
+.false:focus{
+   background-color: red;
+}
+.false:hover{
+   background-color: red;
 }

@@ -1,0 +1,11 @@
+div class="pic"
+    img src="../students/gay.jpg" class="quizpic"
+    h5 1/4 CORRECT
+
+
+    button onclick="result();" class="false" Samir
+    button Marcelo
+    button Ben
+    button Viktor
+    button 
+        a href="/teacher/home" NEXT ->

@@ -1,0 +1,9 @@
+div class="pic"
+    img src="../students/bi.jpg" class="quizpic"
+    h5 0/4 CORRECT   
+    button Marcelo
+    button Viktor
+    button class="correct" Samir
+    button Ben
+    button 
+        a href="/teacher/2quiz" NEXT ->

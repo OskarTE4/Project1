@@ -18,6 +18,21 @@ defmodule Pluggy.PageLoader do
     send_resp(conn, 200, srender("views/index", user: current_user))
   end
 
+  def a1(conn) do
+    send_resp(conn, 200, srender("teacher/1A", []))
+  end
+  def a2(conn) do
+    send_resp(conn, 200, srender("teacher/2A", []))
+  end
+  def a3(conn) do
+    send_resp(conn, 200, srender("teacher/3A", []))
+  end
+  def q1(conn) do
+    send_resp(conn, 200, srender("teacher/1quiz", []))
+  end
+  def q2(conn) do
+    send_resp(conn, 200, srender("teacher/2quiz", []))
+  end
   def error(conn), do: send_resp(conn, 200, srender("views/error", []))
 
   defp redirect(conn, url) do

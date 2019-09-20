@@ -3,6 +3,7 @@ html
    head
        title Whats Their Face v2
        link rel="stylesheet" type="text/css" href="/pluggy.css"
+       script src="/script.js"
        meta charset="UTF-8"
    body
    div class="nav"

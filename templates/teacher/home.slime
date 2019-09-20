@@ -1,15 +1,75 @@
 / for each group in groups where school id is equal to teacher id in connection
-- IO.inspect locals
-=for group <- locals.groups do
-    div
-        a href="/play/group.id"
-        img src="group.img"
-        p #{group.name} - #{group.school}
+/ - IO.inspect locals
+/ =for group <- locals.groups do
+/     div
+/         a href="/play/group.id"
+/         img src="group.img"
+/         p #{group.name} - #{group.school}
 
 
-/ If there are is no school asigned to the teacher
+/ / If there are is no school asigned to the teacher
 
-div
-    h3 Error: no group
-    p No groups have been asigned to you, either talk to the admin or complain into the ether.
+/ div
+/     h3 Error: no group
+/     p No groups have been asigned to you, either talk to the admin or complain into the ether.
+div class="topwhite"
+    div class="schoolT"
+        h1 NTI Johanneberg
+        div class="boxS"
+            div class="eachS"
+                    h4 1A
+                    div class="edit"
+                        h4 
+                            a href="/teacher/1A" SHOW
+                    
+                    div class="remove"
+                        h4
+                            a href="/teacher/1quiz" PRACTICE
+            div class="eachS"
+                h4 2A
+                div class="edit"
+                    h4 
+                        a href="/teacher/2A" SHOW
+                div class="remove"
+                    h4
+                       a href="/teacher/1quiz" PRACTICE
+            div class="eachS"
+                h4 3A
+                div class="edit"
+                    h4 
+                        a href="/teacher/3A" SHOW
+                div class="remove"
+                    h4
+                        a href="/teacher/1quiz" PRACTICE
+
+    div class="schoolT"
+        h1 Hulebäcksgymnasiet
+        div class="boxS"
+            div class="eachS"
+                    h4 1B
+                    div class="edit"
+                        h4 
+                            a href="/teacher/1A" SHOW
+                    
+                    div class="remove"
+                        h4
+                            a href="/teacher/1quiz" PRACTICE
+            div class="eachS"
+                h4 2B
+                div class="edit"
+                    h4 
+                        a href="/teacher/2A" SHOW
+                div class="remove"
+                    h4
+                       a href="/teacher/1quiz" PRACTICE
+            div class="eachS"
+                h4 3B
+                div class="edit"
+                    h4 
+                        a href="/teacher/3A" SHOW
+                div class="remove"
+                    h4
+                        a href="/teacher/1quiz" PRACTICE
+
+
     

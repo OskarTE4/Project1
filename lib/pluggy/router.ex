@@ -3,6 +3,8 @@ defmodule Pluggy.Router do
 
   alias Pluggy.PageLoader
   alias Pluggy.UserController
+  alias Pluggy.Schools
+  alias Pluggy.User
   alias Pluggy.AdminController
   alias Pluggy.TeacherController
   alias Pluggy.GameController
@@ -35,10 +37,17 @@ defmodule Pluggy.Router do
   get("/admin/students", do: AdminController.nst(conn))
   get("/admin/groups", do: AdminController.ng(conn))
   get("/admin/teacher/:schools", do: AdminController.schools(conn))
+  get("/teacher/1A", do: PageLoader.a1(conn))
+  get("/teacher/2A", do: PageLoader.a2(conn))
+  get("/teacher/3A", do: PageLoader.a3(conn))
+  get("/teacher/1quiz", do: PageLoader.q1(conn))
+  get("/teacher/2quiz", do: PageLoader.q2(conn))
 
 
   post("/logout", do: UserController.logout(conn))
   post("/login", do: UserController.login(conn, conn.body_params))
+  post("/delete_school", do: Schools.delete(conn, conn.body_params))
+  post("/delete_teacher", do: User.delete(conn, conn.body_params))
   post("/newT", do: TeacherController.add_new(conn, conn.body_params))
   post("/newS", do: AdminController.add_new(conn, conn.body_params))
   post("/newG", do: AdminController.new_group(conn, conn.body_params))

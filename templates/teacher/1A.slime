@@ -1,0 +1,24 @@
+div class="topwhite"
+    div class="schoolT"
+        h1 ITG
+        h1 1A
+        div class="boxS"
+            div class="eachS"
+                img src="../students/gay.jpg"
+                h4 Ben
+                
+                  
+            div class="eachS"
+                img src="/../students/bi.jpg"
+                h4 Samir
+              
+                 
+            div class="eachS"
+                img src="../students/queer.png"
+                h4 Viktor
+
+            div class="eachS"
+                img src="../students/transgender.jpg"
+                h4   Marcelo
+            
+                    
